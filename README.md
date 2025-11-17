@@ -3,6 +3,7 @@
 Energy-Efficient • AI-Enabled • Safety-Focused • Future-Ready
 
 <p align="center"> <img src="https://img.shields.io/badge/Smart%20City-IoT-blue?style=for-the-badge"> <img src="https://img.shields.io/badge/Arduino-Powered-green?style=for-the-badge"> <img src="https://img.shields.io/badge/Energy%20Saving-90%25+-brightgreen?style=for-the-badge"> <img src="https://img.shields.io/badge/Winner-Innovation%20&%20Tech%20Award-orange?style=for-the-badge"> </p>
+
 🌟 Project Overview
 
 Lumous_Eye is an intelligent street-lighting system that significantly reduces electricity usage while enhancing safety.
@@ -60,34 +61,3 @@ Manages timer + light intensity
 ✔ GSM / IoT cloud monitoring
 ✔ App dashboard (Android + Web)
 ✔ Emergency blinking mode for accidents
-
-📊 Logic Flow Diagram
-                    ┌─────────────┐
-                    │     LDR     │
-                    └──────┬──────┘
-                           │
-                     Night │?
-                           │
-                 ┌─────────▼─────────┐
-                 │     Night Mode     │
-                 └─────────┬─────────┘
-                           │ Yes
-                           ▼
-                    ┌─────────────┐
-                    │   Motion?   │  ← PIR / IR Sensor
-                    └──────┬──────┘
-                           │ Yes
-                           ▼
-                 ┌─────────────────────┐
-                 │  Light ON (5 sec)   │  ← Timer Module
-                 └─────────────────────┘
-
-
-    ┌──────────────────────────────────────────────┐
-    │  Temperature < 20°C   OR   High Humidity?    │  ← DHT11 Sensor
-    └──────────────────────────────────────────────┘
-                           │ Yes
-                           ▼
-                 ┌─────────────────────┐
-                 │  Safe-Mode Dim Light│
-                 └─────────────────────┘
