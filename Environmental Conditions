@@ -1,0 +1,59 @@
+#include <DHT.h>
+
+#define LDR_PIN 6       
+#define DHTPIN 7        
+#define DHTTYPE DHT11   
+#define ENV_LED 8      
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LDR_PIN, INPUT);
+  pinMode(ENV_LED, OUTPUT);
+  dht.begin();
+  Serial.println("System Started. Reading sensors...");
+}
+
+void loop() {
+  
+  int lightState = digitalRead(LDR_PIN); 
+
+  // Read temperature and humidity
+  float temperature = dht.readTemperature();
+  float humidity = dht.readHumidity();       
+
+  
+  if (isnan(temperature) || isnan(humidity)) {
+    Serial.println("Failed to read from DHT11 sensor!");
+    delay(2000);
+    return;
+  }
+
+  // Print DHT11 readings
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.print(" °C | Humidity: ");
+  Serial.print(humidity);
+  Serial.println(" %");
+
+  
+  bool isNight = (lightState == HIGH);  
+  bool isCold = (temperature < 20.0);  
+  bool isFoggy = (humidity > 75.0);    
+
+  
+  if (isNight || isCold || isFoggy) {
+    digitalWrite(ENV_LED, HIGH);
+    Serial.print("ENV LED ON | ");
+    if (isNight) Serial.print("Night ");
+    if (isCold) Serial.print("Cold ");
+    if (isFoggy) Serial.print("Foggy ");
+    Serial.println();
+  } else {
+    digitalWrite(ENV_LED, LOW);
+    Serial.println("ENV LED OFF | Normal Conditions");
+  }
+
+  delay(2000); 
+}
